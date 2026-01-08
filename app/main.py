@@ -18,6 +18,7 @@ def get_weather() -> None:
     }
 
     response = requests.get(url, params=params)
+    response.raise_for_status()
     data = response.json()
 
     city = data["location"]["name"]
