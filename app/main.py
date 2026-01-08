@@ -17,9 +17,15 @@ def get_weather() -> None:
         "key": API_KEY,
     }
 
-    response = requests.get(url, params=params)
-    response.raise_for_status()
-    data = response.json()
+    try:
+        response = requests.get(url, params=params)
+
+        response.raise_for_status()
+
+        data = response.json()
+
+    except requests.exceptions as err:
+        print(err)
 
     city = data["location"]["name"]
     country = data["location"]["country"]
